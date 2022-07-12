@@ -1,0 +1,31 @@
+<div id="pergaminhos">					
+	<h3>Pergaminhos</h3>
+	
+	<ul>
+		<% for(i = 0; i < acoes.length; i++){%>
+			<%
+				var txt_acao = '';
+
+				switch (parseInt(acoes[i].acao)) {
+					case 1: txt_acao = 'Aldeão(ões) coletando recursos'; 
+					break;
+					case 2: txt_acao = 'Enforcamento(s) programados'; 
+					break;
+					case 3: txt_acao = 'Aldeão(ões) em treinamento de história'; 
+					break;
+					case 4: txt_acao = 'Aldeão(ões) em treinamento de magia'	; 
+					break;
+				}
+			
+				var date = new Date()
+				var momento_atual = date.getTime()
+				var tempo_restante = Math.floor((acoes[i].termina_em - momento_atual) / 1000);
+
+
+			%>
+			<li>
+				<%= acoes[i].quantidade%> <%= txt_acao %> - <small>restam <span class="tempo_restante"><%= tempo_restante %> </span> segundos - <a href="/revogar_acao?id_acao=<%= acoes[i]._id %>">revogar ordem</a></small>
+			</li>
+		<%}%>	
+	</ul>
+</div>
