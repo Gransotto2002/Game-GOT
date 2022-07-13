@@ -21,8 +21,10 @@ UsuariosDAO.prototype.inserirUsuario = function(usuario){
 UsuariosDAO.prototype.autenticar = function(usuario, req, res){
   this._connection.open((error, mongoclient) => {
     mongoclient.collection('usuarios', (error, collection) =>{
+
       let senha_hash = crypto.createHash('md5').update(usuario.senha).digest('hex')
       usuario.senha = senha_hash
+      console.log(usuario.senha);
       collection.find(usuario).toArray((error, result) => {
         
         if(result[0] != undefined){
